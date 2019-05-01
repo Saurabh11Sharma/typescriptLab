@@ -1,23 +1,35 @@
-let myControlFlow: string | number;
+interface Warrior {
+    name: string;
+    weapon: string;
+    strength: number;
+};
 
-myControlFlow = `Hello I'm a string`;
-console.log(typeof myControlFlow);
-
-myControlFlow = 4;
-console.log(typeof myControlFlow);
-
-interface Creature {
-    readonly height: number;
-    readonly width: number;
-    readonly ocean: string;
+type Category<T> = {
+    [P in keyof T] ?: T[P];
 }
 
-let vreeg: Creature = {
-    height: 100,
-    width: 150,
-    ocean: 'Pacific'
-}
-console.log(vreeg);
+type Samurai = Category<Warrior>;
 
-vreeg.ocean = 'Atlantic';
-console.log(vreeg);
+let samuraiOne: Samurai = {
+    name: 'SamuraiOne',
+    weapon: 'staff'
+}
+
+console.log(samuraiOne);
+
+let vreegKing = {
+    size: 250,
+    ocean: 'Pacific',
+    snout: 'Big'
+}
+
+console.log(vreegKing);
+
+// rest
+let { snout, ...vreegQueen } = vreegKing;
+vreegQueen.ocean = 'Atlantic';
+console.log(vreegQueen);
+
+// spread
+let monsters = {...vreegKing, ...vreegQueen};
+console.log(monsters);
